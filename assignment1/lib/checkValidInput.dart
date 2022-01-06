@@ -7,12 +7,15 @@ List splitStringByComma(String input) {
 bool checkValidInput(String input) {
   List splitInput = splitStringByComma(input);
 
+  //checking if all 4 details are provided or not and the first detail is item name.
   if (splitInput.length != 4 || splitInput[0].split(' ')[0] != '-name') {
     return false;
   }
 
   bool priceFound = false, quantityFound = false, typeFound = false;
   String price = '', quanity = '', type = '';
+
+  //checking if all 3 details price, quantity and type are provided or not.
   for (String detail in splitInput) {
     if (detail.split(' ')[0] == '-price') {
       priceFound = true;
@@ -23,6 +26,7 @@ bool checkValidInput(String input) {
     } else if (detail.split(' ')[0] == '-type') {
       typeFound = true;
       type = detail.split(' ')[1];
+      //checking if type is from raw, manufactured and imported only.
       if (type != 'raw' && type != 'manufactured' && type != 'imported') {
         return false;
       }
@@ -30,6 +34,7 @@ bool checkValidInput(String input) {
   }
 
   if (priceFound && quantityFound && typeFound) {
+    //checking if integer values for price and quantity are provided.
     try {
       double.parse(price);
       int.parse(quanity);
@@ -38,7 +43,7 @@ bool checkValidInput(String input) {
     }
     return true;
   } else {
-    return true;
+    return false;
   }
 }
 
