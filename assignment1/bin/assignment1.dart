@@ -1,33 +1,46 @@
 import 'dart:io';
 import 'package:assignment1/item.dart';
-import 'package:assignment1/checkValidInput.dart';
+import 'package:assignment1/item_factory.dart';
+import 'package:assignment1/utility.dart';
 
-void main() {
-  String choice = 'y';
-  while (choice == 'y') {
-    print(
-        '---------------------------------------------------------------------------------------------------------------------------------------------');
-    print(
-        '\nPlease enter the items in the format below separating each property with a comma\n');
-    print(
-        '-name <item name>,-price <item price>,-quantity <item quantity>,-type <item type>\n');
-    print(
-        'The item type can be any of the following 1.raw 2.manufactured 3.imported\n');
-    String inputItem = stdin.readLineSync()!;
-    if (checkValidInput(inputItem)) {
-      Item item = returnItemObject(inputItem);
-      item.calculateTax();
+void main(List<String> args) {
+  try {
+    String inputItem = args.join(' ');
+    String choice = '';
+    while (choice != 'n') {
       print(
-          "\nThe ${item.getType()} item ${item.getName()} is priced at ${item.getPrice()} and for quantity ${item.getQuantity()} will be taxed amount ${item.getTaxAmount()} per  => Total Amount: ${item.getTotalAmount()}\n");
+          '---------------------------------------------------------------------------------------------------------------------------------------------');
+      print(
+          '\nPlease enter the items in the format below separating each property with a space\n');
+      print(
+          '-name <item name> -price <item price> -quantity <item quantity> -type <item type>\n');
+      print(
+          'The item type can be any of the following 1.raw 2.manufactured 3.imported\n');
+
+      if (choice == 'y') {
+        inputItem = stdin.readLineSync()!;
+      }
+
+      Map formattedInput = UtilityFunctions.validateInput(inputItem);
+
+      //extracting paramters from the formatted input map.
+      String name = formattedInput['-name'];
+      double price = formattedInput['-price'];
+      int quantity = formattedInput['-quantity'];
+      ItemTypes type = UtilityFunctions.returnItemType(formattedInput['-type']);
+
+      Item item = ItemFactory.itemFactory(name, price, quantity, type);
+
+      print(
+          "\nThe item ${item.name} is priced at ${item.price} and for quantity ${item.quantity} will cost ${(item.price + item.calculateTax()) * item.quantity} after tax\n");
       print(
           '---------------------------------------------------------------------------------------------------------------------------------------------');
       print("Do you want to enter details of any other item (y/n): ");
       choice = stdin.readLineSync()!;
-    } else {
-      print('\nPlease enter the details in a valid format\n');
-      print(
-          '---------------------------------------------------------------------------------------------------------------------------------------------');
     }
+  } catch (e) {
+    print(e.toString());
+  } finally {
+    print("\nThanks For Visiting\n");
   }
-  print("\nThanks For Visiting\n");
 }
