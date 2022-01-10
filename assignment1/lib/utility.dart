@@ -20,12 +20,14 @@ class UtilityFunctions {
       if (splitedInput[index] == '-name') {
         formattedInput[splitedInput[index]] = splitedInput[index + 1];
       } else if (splitedInput[index] == '-price') {
-        formattedInput[splitedInput[index]] =
-            double.parse(splitedInput[index + 1]);
+        double price = double.parse(splitedInput[index + 1]);
+        if (price < 0) throw Exception('Please enter positive price');
+        formattedInput[splitedInput[index]] = price;
         priceFound = true;
       } else if (splitedInput[index] == '-quantity') {
-        formattedInput[splitedInput[index]] =
-            int.parse(splitedInput[index + 1]);
+        int quantity = int.parse(splitedInput[index + 1]);
+        if (quantity < 0) throw Exception('Please enter positive price');
+        formattedInput[splitedInput[index]] = quantity;
         quantityFound = true;
       } else if (splitedInput[index] == '-type') {
         formattedInput[splitedInput[index]] = splitedInput[index + 1];

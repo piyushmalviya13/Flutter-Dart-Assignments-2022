@@ -50,6 +50,20 @@ void main() {
         throwsException);
   });
 
+  test('validateInput works correctly for negative price', () {
+    expect(
+        () => UtilityFunctions.validateInput(
+            '-name apple -price -25.00 -quantity 10 -type raw'),
+        throwsException);
+  });
+
+  test('validateInput works correctly for negative quanity', () {
+    expect(
+        () => UtilityFunctions.validateInput(
+            '-name apple -price 25.00 -quantity -10 -what raw'),
+        throwsException);
+  });
+
   test('validateInput works correctly for correct inputs', () {
     expect(
         UtilityFunctions.validateInput(
