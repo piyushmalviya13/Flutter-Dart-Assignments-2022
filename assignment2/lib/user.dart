@@ -1,12 +1,28 @@
 class User {
-  final String _fullName;
-  final int _age;
-  final int _rollNumber;
-  final String _address;
-  final Set _courses;
+  late String _fullName;
+  late int _age;
+  late int _rollNumber;
+  late String _address;
+  late Set _courses;
+  final validCourses = {'A', 'B', 'C', 'D', 'E', 'F'};
 
-  User(this._fullName, this._age, this._rollNumber, this._address,
-      this._courses);
+  User(String fullName, String age, String rollNumber, String address,
+      String courses) {
+    _fullName = validateName(fullName);
+    _age = validateAge(age);
+    _rollNumber = validateRollNumber(rollNumber);
+    _address = validateAddress(address);
+    _courses = validateCourses(courses);
+  }
+
+  //constructor for creating object using json
+  User.fromJson(dynamic json) {
+    _fullName = validateName(json['fullName']);
+    _age = validateAge(json['age']);
+    _rollNumber = validateRollNumber(json['rollNumber']);
+    _address = validateAddress(json['address']);
+    _courses = validateCourses(json['courses']);
+  }
 
   String get fullName => _fullName;
 
@@ -18,39 +34,39 @@ class User {
 
   int get rollNumber => _rollNumber;
 
-  static String validateName(String name) {
-    if (name == '') {
+  String validateName(String name) {
+    if (name.isEmpty) {
       throw Exception('Please enter valid name\n');
     }
     return name;
   }
 
-  static int validateAge(String age) {
+  int validateAge(String age) {
     int? validAge = int.tryParse(age);
-    if (validAge == null || validAge <= 0) {
+    if ((validAge ?? 0) <= 0) {
       throw Exception('Please enter valid age\n');
     }
-    return validAge;
+    return validAge!;
   }
 
   static int validateRollNumber(String rollNumber) {
     int? validRollNumber = int.tryParse(rollNumber);
-    if (validRollNumber == null || validRollNumber <= 0) {
+    if ((validRollNumber ?? 0) <= 0) {
       throw Exception('Please enter valid roll number\n');
     }
-    return validRollNumber;
+    return validRollNumber!;
   }
 
-  static String validateAddress(String address) {
-    if (address == '') {
+  String validateAddress(String address) {
+    if (address.isEmpty) {
       throw Exception('Please enter valid name\n');
     }
     return address;
   }
 
   //function to convert courses from string to set and checking for repeated course and in valid courses
-  static Set validateCourses(String courses) {
-    Set validCourses = {'A', 'B', 'C', 'D', 'E', 'F'}, userCourses = {};
+  Set validateCourses(String courses) {
+    Set userCourses = {};
 
     courses.split(' ').forEach((course) {
       if (validCourses.contains(course)) {

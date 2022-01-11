@@ -19,12 +19,7 @@ class UsersDetails {
 
     //generating user objects from json and adding to in memory state
     userDetailsJson.forEach((userDetail) {
-      User user = createUser(
-          userDetail['fullName'],
-          userDetail['age'],
-          userDetail['rollNumber'],
-          userDetail['address'],
-          userDetail['courses']);
+      User user = User.fromJson(userDetail);
       usersDetails.add(user);
     });
 
@@ -32,21 +27,21 @@ class UsersDetails {
   }
 
   //function to create a User object from the user input in string format
-  static User createUser(String fullName, String age, String rollNumber,
-      String address, String courses) {
-    String userFullName = User.validateName(fullName);
-    int userAge = User.validateAge(age);
-    int userRollNumber = User.validateRollNumber(rollNumber);
-    String userAddress = User.validateAddress(address);
-    Set userCourses = User.validateCourses(courses);
+  // static User createUser(String fullName, String age, String rollNumber,
+  //     String address, String courses) {
+  //   String userFullName = User.validateName(fullName);
+  //   int userAge = User.validateAge(age);
+  //   int userRollNumber = User.validateRollNumber(rollNumber);
+  //   String userAddress = User.validateAddress(address);
+  //   Set userCourses = User.validateCourses(courses);
 
-    return User(
-        userFullName, userAge, userRollNumber, userAddress, userCourses);
-  }
+  //   return User(
+  //       userFullName, userAge, userRollNumber, userAddress, userCourses);
+  // }
 
   String addUser(String fullName, String age, String rollNumber, String address,
       String courses) {
-    User user = createUser(fullName, age, rollNumber, address, courses);
+    User user = User(fullName, age, rollNumber, address, courses);
     if (checkExistingRollNumber(user.rollNumber)) {
       return '\n It seems the roll number you entered already exists\n';
     } else {

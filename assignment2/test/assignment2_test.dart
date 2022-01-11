@@ -28,6 +28,18 @@ void main() {
           throwsException);
     });
 
+    test('add user function works correctly for negative age', () {
+      UsersDetails users = UsersDetails([]);
+      expect(() => {users.addUser('test', '-1', '1', 'test', 'A B C D')},
+          throwsException);
+    });
+
+    test('add user function works correctly for negative age', () {
+      UsersDetails users = UsersDetails([]);
+      expect(() => {users.addUser('test', '1', '-1', 'test', 'A B C D')},
+          throwsException);
+    });
+
     test('add user function works correctly for invalid roll number', () {
       UsersDetails users = UsersDetails([]);
       expect(() => {users.addUser('test', '1', '1lwkaf', 'test', 'A B C D')},
@@ -74,7 +86,7 @@ void main() {
 
     test('load stored data function works correctly', () async {
       UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
-      expect(users.checkExistingRollNumber(2), false);
+      expect(users.checkExistingRollNumber(3), false);
     });
   });
 
