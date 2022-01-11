@@ -13,35 +13,26 @@ class UsersDetails {
 
     //retriving user details as string converting it to base64 then to utf8 then to json
     var userDetails = await File("./lib/storage/storage.txt").readAsString();
-    var userDetailsBase64 = base64.decode(userDetails);
-    var userDetailsUtf8 = utf8.decode(userDetailsBase64);
-    var userDetailsJson = jsonDecode(userDetailsUtf8);
 
-    //generating user objects from json and adding to in memory state
-    userDetailsJson.forEach((userDetail) {
-      User user = User.fromJson(userDetail);
-      usersDetails.add(user);
-    });
+    if (userDetails.isNotEmpty) {
+      var userDetailsBase64 = base64.decode(userDetails);
+      var userDetailsUtf8 = utf8.decode(userDetailsBase64);
+      var userDetailsJson = jsonDecode(userDetailsUtf8);
+
+      //generating user objects from json and adding to in memory state
+      userDetailsJson.forEach((userDetail) {
+        User user = User.fromJson(userDetail);
+        usersDetails.add(user);
+      });
+    }
 
     return usersDetails;
   }
 
-  //function to create a User object from the user input in string format
-  // static User createUser(String fullName, String age, String rollNumber,
-  //     String address, String courses) {
-  //   String userFullName = User.validateName(fullName);
-  //   int userAge = User.validateAge(age);
-  //   int userRollNumber = User.validateRollNumber(rollNumber);
-  //   String userAddress = User.validateAddress(address);
-  //   Set userCourses = User.validateCourses(courses);
-
-  //   return User(
-  //       userFullName, userAge, userRollNumber, userAddress, userCourses);
-  // }
-
   String addUser(String fullName, String age, String rollNumber, String address,
       String courses) {
     User user = User(fullName, age, rollNumber, address, courses);
+    user.validateUser();
     if (checkExistingRollNumber(user.rollNumber)) {
       return '\n It seems the roll number you entered already exists\n';
     } else {
@@ -77,13 +68,12 @@ class UsersDetails {
     ];
 
     _usersDetails.forEach((user) {
-      String userCourses = user.courses.join(', ');
       List userList = [
         user.fullName,
         user.rollNumber,
         user.age,
         user.address,
-        userCourses
+        user.courses
       ];
       userData.add(userList);
     });
@@ -94,8 +84,11 @@ class UsersDetails {
 
   //function to remove a user from in memory structure
   String removeUser(String rollNumber) {
-    int userRollNumber = User.validateRollNumber(rollNumber);
-    if (checkExistingRollNumber(userRollNumber)) {
+    int? userRollNumber = int.tryParse(rollNumber);
+    if ((userRollNumber ?? 0) <= 0) {
+      throw Exception('Please enter valid roll number\n');
+    }
+    if (checkExistingRollNumber(userRollNumber!)) {
       _usersDetails.removeWhere((user) => user.rollNumber == userRollNumber);
       return '\n User deleted!! \n';
     } else {
