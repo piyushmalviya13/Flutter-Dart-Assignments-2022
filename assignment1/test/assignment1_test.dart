@@ -1,4 +1,4 @@
-import 'package:assignment1/item.dart';
+import 'package:assignment1/model/item.dart';
 import 'package:assignment1/item_factory.dart';
 import 'package:assignment1/utility.dart';
 import 'package:test/test.dart';

@@ -1,7 +1,7 @@
-import 'package:assignment1/imported_item.dart';
-import 'package:assignment1/item.dart';
-import 'package:assignment1/manufactured_item.dart';
-import 'package:assignment1/raw_item.dart';
+import 'package:assignment1/model/item_types_model/imported_item.dart';
+import 'package:assignment1/model/item.dart';
+import 'package:assignment1/model/item_types_model/manufactured_item.dart';
+import 'package:assignment1/model/item_types_model/raw_item.dart';
 import 'package:assignment1/utility.dart';
 
 class ItemFactory {
