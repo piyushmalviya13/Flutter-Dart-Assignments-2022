@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:assignment2/users_details.dart';
+import 'package:tabular/tabular.dart';
 
 void main() async {
   String choice = '0';
@@ -31,7 +32,8 @@ void main() async {
               fullName, age, rollNumber, address, courses));
           break;
         case '2':
-          usersDetails.displayUser();
+          var tabularData = tabular(usersDetails.displayUser());
+          print(tabularData);
           break;
         case '3':
           print('Enter roll number:');
@@ -49,7 +51,7 @@ void main() async {
           break;
       }
     } catch (e) {
-      print(e.toString());
+      print(e.toString().substring(11));
     }
   }
 }

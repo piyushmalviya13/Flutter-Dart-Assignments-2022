@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:assignment2/user.dart';
 import 'package:assignment2/users_details.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -115,10 +118,10 @@ void main() {
   });
 
   group('testing load stored data function', () {
-    test('load stored data function works correctly', () async {
-      UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
-      expect(users.checkExistingRollNumber(1), true);
-    });
+    // test('load stored data function works correctly', () async {
+    //   UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
+    //   expect(users.checkExistingRollNumber(1), true);
+    // });
 
     test('load stored data function works correctly', () async {
       UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
@@ -126,10 +129,25 @@ void main() {
     });
   });
 
-  group('testing load stored data function', () {
-    test('load stored data function works correctly', () async {
+  group('testing save user function', () {
+    test('save user function works correctly', () async {
       UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
       expect(users.saveUsers(), '\n Details saved successfully\n');
+    });
+  });
+
+  group('testing display users function', () {
+    test('display user function works correctly', () async {
+      var responses = ["1\n", "A\n"];
+      UsersDetails users = UsersDetails([]);
+      users.addUser('test1', '1', '1', 'test1', 'A B C D');
+      users.addUser('test2', '2', '2', 'test2', 'A B C D');
+      when(users.readUserInput()).thenAnswer((_) => responses.removeAt(0));
+      expect(users.displayUser(), [
+        ['Name', 'Roll Number', 'Age', 'Address', 'Courses'],
+        ['test1', '1', '1', 'test1', 'A B C D'],
+        ['test2', '2', '2', 'test2', 'A B C D']
+      ]);
     });
   });
 }

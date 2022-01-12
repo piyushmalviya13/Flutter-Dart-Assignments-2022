@@ -44,17 +44,22 @@ class UsersDetails {
     }
   }
 
-  void displayUser() {
+  List<List> displayUser() {
     print('\n1. Sort based on name');
     print('2. Sort based on age');
     print('3. Sort based on roll number');
     print('4. Sort based on address \n');
     print('Enter a choice:');
-    String sortBy = stdin.readLineSync()!;
-
+    String sortBy = readUserInput();
+    if (sortBy != '1' && sortBy != '2' && sortBy != '3' && sortBy != '4') {
+      throw Exception('Enter a valid choice');
+    }
     print(
         '\nEnter A to sort in ascending order or D to sort in descending order.');
-    String sortIn = stdin.readLineSync()!;
+    String sortIn = readUserInput();
+    if (sortIn != 'A' && sortIn != 'B') {
+      throw Exception('Enter a valid choice');
+    }
 
     //sorting data based on user input.
     if (sortIn == 'A') {
@@ -77,9 +82,7 @@ class UsersDetails {
       ];
       userData.add(userList);
     });
-    var tabularData = tabular(userData);
-
-    print(tabularData);
+    return userData;
   }
 
   //function to remove a user from in memory structure
@@ -121,5 +124,9 @@ class UsersDetails {
       return true;
     }
     return false;
+  }
+
+  String readUserInput() {
+    return stdin.readLineSync()!;
   }
 }
