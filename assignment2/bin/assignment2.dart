@@ -32,7 +32,26 @@ void main() async {
               fullName, age, rollNumber, address, courses));
           break;
         case '2':
-          var tabularData = tabular(usersDetails.displayUser());
+          print('\n1. Sort based on name');
+          print('2. Sort based on age');
+          print('3. Sort based on roll number');
+          print('4. Sort based on address \n');
+          print('Enter a choice:');
+
+          String sortBy = stdin.readLineSync()!;
+          if (sortBy != '1' &&
+              sortBy != '2' &&
+              sortBy != '3' &&
+              sortBy != '4') {
+            throw Exception('Enter a valid choice');
+          }
+          print(
+              '\nEnter A to sort in ascending order or D to sort in descending order.');
+          String sortIn = stdin.readLineSync()!;
+          if (sortIn != 'A' && sortIn != 'D') {
+            throw Exception('Enter a valid choice');
+          }
+          var tabularData = tabular(usersDetails.displayUser(sortBy, sortIn));
           print(tabularData);
           break;
         case '3':
@@ -44,7 +63,11 @@ void main() async {
           print(usersDetails.saveUsers());
           break;
         case '5':
-          usersDetails.exitApplication();
+          print('\nDo you want to save the changes you made? Enter Y or N.\n');
+          String choice = stdin.readLineSync()!;
+          if (choice == 'Y') {
+            usersDetails.saveUsers();
+          }
           break;
         default:
           print('Enter valid choice\n');

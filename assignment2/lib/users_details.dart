@@ -29,7 +29,7 @@ class UsersDetails {
     return usersDetails;
   }
 
-  String addUser(String fullName, String age, String rollNumber, String address,
+  String addUser(String fullName, String rollNumber, String age, String address,
       String courses) {
     User user = User(fullName, age, rollNumber, address, courses);
     user.validateUser();
@@ -44,23 +44,7 @@ class UsersDetails {
     }
   }
 
-  List<List> displayUser() {
-    print('\n1. Sort based on name');
-    print('2. Sort based on age');
-    print('3. Sort based on roll number');
-    print('4. Sort based on address \n');
-    print('Enter a choice:');
-    String sortBy = readUserInput();
-    if (sortBy != '1' && sortBy != '2' && sortBy != '3' && sortBy != '4') {
-      throw Exception('Enter a valid choice');
-    }
-    print(
-        '\nEnter A to sort in ascending order or D to sort in descending order.');
-    String sortIn = readUserInput();
-    if (sortIn != 'A' && sortIn != 'B') {
-      throw Exception('Enter a valid choice');
-    }
-
+  List<List> displayUser(String sortBy, String sortIn) {
     //sorting data based on user input.
     if (sortIn == 'A') {
       _usersDetails.sort((a, b) => User.compareUsers(a, b, sortBy));
@@ -108,15 +92,6 @@ class UsersDetails {
     return '\n Details saved successfully\n';
   }
 
-  //function to check if user wants to save info.
-  void exitApplication() {
-    print('\nDo you want to save the changes you made? Enter Y or N.\n');
-    String choice = stdin.readLineSync()!;
-    if (choice == 'Y') {
-      saveUsers();
-    }
-  }
-
   //checking if a roll number already exists in memory
   bool checkExistingRollNumber(int rollNumber) {
     if ((_usersDetails.where((user) => user.rollNumber == rollNumber)).length ==
@@ -124,9 +99,5 @@ class UsersDetails {
       return true;
     }
     return false;
-  }
-
-  String readUserInput() {
-    return stdin.readLineSync()!;
   }
 }

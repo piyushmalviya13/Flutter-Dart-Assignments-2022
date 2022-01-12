@@ -68,19 +68,18 @@ class User {
 
   static int compareUsers(User user1, User user2, String sortBy) {
     if (sortBy == '1') {
-      var comparisonResult = user1._fullName
+      int comparisonResult = user1._fullName
           .toLowerCase()
           .compareTo(user2._fullName.toLowerCase());
-      if (comparisonResult != 0) {
+      if (comparisonResult == 0) {
+        return user1.rollNumber.compareTo(user2.rollNumber);
+      } else {
         return comparisonResult;
       }
-      return int.parse(user1._rollNumber)
-          .compareTo(int.parse(user2._rollNumber));
     } else if (sortBy == '2') {
-      return int.parse(user1._rollNumber)
-          .compareTo(int.parse(user2._rollNumber));
+      return user1.age.compareTo(user2.age);
     } else if (sortBy == '3') {
-      return int.parse(user1._age).compareTo(int.parse(user2._age));
+      return user1.rollNumber.compareTo(user2.rollNumber);
     } else {
       return user1._address
           .toLowerCase()
