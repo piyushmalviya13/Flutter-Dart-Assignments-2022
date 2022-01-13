@@ -4,7 +4,7 @@ import 'package:tabular/tabular.dart';
 
 void main() async {
   String choice = '0';
-  UsersDetails usersDetails = UsersDetails(await UsersDetails.loadStoredData());
+  UsersDetails usersDetails = UsersDetails(await UsersDetails.loadUsers());
   while (choice != '5') {
     try {
       print('\n1. Add User Details');
