@@ -125,14 +125,14 @@ void main() {
 
   group('testing load stored data function', () {
     test('load stored data function works correctly', () async {
-      UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
+      UsersDetails users = UsersDetails(await UsersDetails.loadUsers());
       expect(users.checkExistingRollNumber(3), false);
     });
   });
 
   group('testing save user function', () {
     test('save user function works correctly', () async {
-      UsersDetails users = UsersDetails(await UsersDetails.loadStoredData());
+      UsersDetails users = UsersDetails(await UsersDetails.loadUsers());
       expect(users.saveUsers(), '\n Details saved successfully\n');
     });
   });

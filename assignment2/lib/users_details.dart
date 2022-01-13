@@ -3,16 +3,18 @@ import 'dart:io';
 import 'package:assignment2/user.dart';
 import 'package:tabular/tabular.dart';
 
+final storageAddress = './lib/storage/storage.txt';
+
 class UsersDetails {
   final List _usersDetails;
 
   UsersDetails(this._usersDetails);
 
-  static Future<List> loadStoredData() async {
+  static Future<List> loadUsers() async {
     List usersDetails = [];
 
     //retriving user details as string converting it to base64 then to utf8 then to json
-    var userDetails = await File("./lib/storage/storage.txt").readAsString();
+    var userDetails = await File(storageAddress).readAsString();
 
     if (userDetails.isNotEmpty) {
       var userDetailsBase64 = base64.decode(userDetails);
@@ -88,7 +90,7 @@ class UsersDetails {
     String jsonUserDetails = jsonEncode(_usersDetails);
     var utfUserDetails = utf8.encode(jsonUserDetails);
     var encoded1 = base64.encode(utfUserDetails);
-    File("./lib/storage/storage.txt").writeAsStringSync(encoded1);
+    File(storageAddress).writeAsStringSync(encoded1);
     return '\n Details saved successfully\n';
   }
 
