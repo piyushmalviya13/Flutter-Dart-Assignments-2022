@@ -29,7 +29,7 @@ class UsersDetails {
     return usersDetails;
   }
 
-  String addUser(String fullName, String age, String rollNumber, String address,
+  String addUser(String fullName, String rollNumber, String age, String address,
       String courses) {
     User user = User(fullName, age, rollNumber, address, courses);
     user.validateUser();
@@ -44,18 +44,7 @@ class UsersDetails {
     }
   }
 
-  void displayUser() {
-    print('\n1. Sort based on name');
-    print('2. Sort based on age');
-    print('3. Sort based on roll number');
-    print('4. Sort based on address \n');
-    print('Enter a choice:');
-    String sortBy = stdin.readLineSync()!;
-
-    print(
-        '\nEnter A to sort in ascending order or D to sort in descending order.');
-    String sortIn = stdin.readLineSync()!;
-
+  List<List> displayUser(String sortBy, String sortIn) {
     //sorting data based on user input.
     if (sortIn == 'A') {
       _usersDetails.sort((a, b) => User.compareUsers(a, b, sortBy));
@@ -77,9 +66,7 @@ class UsersDetails {
       ];
       userData.add(userList);
     });
-    var tabularData = tabular(userData);
-
-    print(tabularData);
+    return userData;
   }
 
   //function to remove a user from in memory structure
@@ -103,15 +90,6 @@ class UsersDetails {
     var encoded1 = base64.encode(utfUserDetails);
     File("./lib/storage/storage.txt").writeAsStringSync(encoded1);
     return '\n Details saved successfully\n';
-  }
-
-  //function to check if user wants to save info.
-  void exitApplication() {
-    print('\nDo you want to save the changes you made? Enter Y or N.\n');
-    String choice = stdin.readLineSync()!;
-    if (choice == 'Y') {
-      saveUsers();
-    }
   }
 
   //checking if a roll number already exists in memory

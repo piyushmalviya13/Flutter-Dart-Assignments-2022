@@ -32,6 +32,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "build",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/build-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "built_collection",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/built_collection-5.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "built_value",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/built_value-8.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "charcode",
       "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1",
       "packageUri": "lib/",
@@ -40,6 +58,12 @@
     {
       "name": "cli_util",
       "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/cli_util-0.3.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "code_builder",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/code_builder-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -68,8 +92,20 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dart_style",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/dart_style-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "file",
       "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/file-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "fixnum",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -140,6 +176,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "mockito",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/mockito-5.0.17",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "node_preamble",
       "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1",
       "packageUri": "lib/",
@@ -196,6 +238,12 @@
     {
       "name": "shelf_web_socket",
       "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/shelf_web_socket-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "source_gen",
+      "rootUri": "file:///Users/piyushmalviya/.pub-cache/hosted/pub.dartlang.org/source_gen-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -308,7 +356,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-01-12T07:16:35.961964Z",
+  "generated": "2022-01-12T10:14:05.308688Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }
