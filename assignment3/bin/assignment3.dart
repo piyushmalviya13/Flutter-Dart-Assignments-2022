@@ -1,35 +1,94 @@
 import 'dart:io';
 
-import 'package:assignment3/assignment3.dart' as assignment3;
+import 'package:assignment3/Tree.dart';
 
 void main() {
-  String choice = stdin.readLineSync()!;
-  while (choice != '9') {
+  Tree tree = Tree();
+  String choice = '';
+  while (choice != '10') {
     try {
-      print('\n1. Get parents of a node');
-      print('2. Get children of a node');
-      print('3. Get ancestors of a node');
-      print('4. Get descendants of a node');
-      print('5. Delete a dependency from tree');
-      print('6. Delete node from tree');
-      print('7. Add new dependency to the tree');
-      print('8. Add new node to the tree');
-      print('9. Exit\n');
+      print('\n1. Get all nodes in tree');
+      print('2. Get parents of a node');
+      print('3. Get children of a node');
+      print('4. Get ancestors of a node');
+      print('5. Get descendants of a node');
+      print('6. Delete a dependency from tree');
+      print('7. Delete node from tree');
+      print('8. Add new dependency to the tree');
+      print('9. Add new node to the tree');
+      print('10. Exit\n');
 
       print('Enter a choice:');
       choice = stdin.readLineSync()!;
       switch (choice) {
         case '1':
+          print('');
+          tree.getNodeIds().forEach((id) {
+            print(id);
+          });
           break;
         case '2':
+          print('Enter node id: ');
+          String input = stdin.readLineSync()!;
+          print('');
+          tree.getParents(input).forEach((node) {
+            print(node);
+          });
           break;
         case '3':
+          print('Enter node id: ');
+          String input = stdin.readLineSync()!;
+          print('');
+          tree.getChildren(input).forEach((node) {
+            print(node);
+          });
           break;
         case '4':
+          print('Enter node id: ');
+          String input = stdin.readLineSync()!;
+          print('');
+          tree.getAncestors(input).forEach((node) {
+            print(node);
+          });
           break;
         case '5':
+          print('Enter node id: ');
+          String input = stdin.readLineSync()!;
+          print('');
+          tree.getDescendants(input).forEach((node) {
+            print(node);
+          });
+          break;
+        case '6':
+          print('Enter node id in format `<Parent id> <Child id>` :');
+          String input = stdin.readLineSync()!;
+          print('');
+          print(
+              tree.removeDependency(input.split(' ')[0], input.split(' ')[1]));
+          break;
+        case '7':
+          print('Enter node id: ');
+          String input = stdin.readLineSync()!;
+          print('');
+          print(tree.removeNode(input));
+          break;
+        case '8':
+          print('Enter node id in format `<Parent id> <Child id>` :');
+          String input = stdin.readLineSync()!;
+          print('');
+          print(tree.addDependency(input.split(' ')[0], input.split(' ')[1]));
+          break;
+        case '9':
+          print('Enter new node in format `<id> <name>` :');
+          String input = stdin.readLineSync()!;
+          print('');
+          print(tree.addNode(input.split(' ')[0], input.split(' ')[1]));
+          break;
+        case '10':
+          print('Exiting\n');
           break;
         default:
+          print('Enter valid choice!!\n');
           break;
       }
     } catch (e) {

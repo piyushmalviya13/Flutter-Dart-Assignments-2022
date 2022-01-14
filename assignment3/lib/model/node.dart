@@ -1,8 +1,12 @@
 class Node {
-  final String id;
-  final String name;
-  List<Node> ancestor = [];
-  List<Node> descendant = [];
+  final String _id;
+  final String _name;
+  final List<String> parent = [];
+  final List<String> children = [];
 
-  Node(this.id, this.name);
+  Node(this._id, this._name);
+
+  String get id => _id;
+
+  String get name => _name;
 }
