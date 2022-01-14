@@ -1,4 +1,5 @@
 import 'package:assignment3/Tree.dart';
+import 'package:assignment3/model/node.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -150,5 +151,10 @@ void main() {
       Tree tree = Tree();
       expect(() => {tree.getDescendants('2')}, throwsException);
     });
+  });
+
+  test('get name fuunction', () {
+    Node node = Node('1', 'test');
+    expect(node.name, 'test');
   });
 }

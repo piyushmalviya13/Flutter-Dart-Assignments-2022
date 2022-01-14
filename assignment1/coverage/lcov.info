@@ -1,4 +1,4 @@
-SF:lib/item.dart
+SF:lib/model/item.dart
 DA:6,1
 DA:8,2
 DA:10,2
@@ -50,7 +50,7 @@ DA:55,1
 LF:28
 LH:27
 end_of_record
-SF:lib/imported_item.dart
+SF:lib/model/item_types_model/imported_item.dart
 DA:4,1
 DA:5,1
 DA:12,1
@@ -65,7 +65,7 @@ DA:24,1
 LF:11
 LH:11
 end_of_record
-SF:lib/manufactured_item.dart
+SF:lib/model/item_types_model/manufactured_item.dart
 DA:4,1
 DA:5,1
 DA:9,1
@@ -74,7 +74,7 @@ DA:12,7
 LF:5
 LH:5
 end_of_record
-SF:lib/raw_item.dart
+SF:lib/model/item_types_model/raw_item.dart
 DA:4,1
 DA:5,1
 DA:9,1
