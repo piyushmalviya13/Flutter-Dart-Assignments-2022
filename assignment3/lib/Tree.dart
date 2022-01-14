@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'package:assignment3/model/node.dart';
 
 class Tree {
-  HashMap<String, Node> _tree = HashMap();
+  final HashMap<String, Node> _tree = HashMap();
 
   bool checkNodeId(String nodeId) {
     return _tree.containsKey(nodeId);
@@ -28,12 +28,12 @@ class Tree {
     }
     //removing dependancy from children of provided node
     _tree[nodeId]!.children.forEach((childNodeId) {
-      removeDependency(nodeId, childNodeId);
+      _tree[childNodeId]!.parent.remove(nodeId);
     });
 
     //removing dependancy from parent of provided node
     _tree[nodeId]!.parent.forEach((parentNodeId) {
-      removeDependency(parentNodeId, nodeId);
+      _tree[parentNodeId]!.children.remove(nodeId);
     });
 
     _tree.remove(nodeId);
@@ -97,38 +97,44 @@ class Tree {
 
   //get ancestors using breadth first search for the given node
   List<String> getAncestors(String nodeId) {
-    List<String> ancestors = [];
-    Queue<Node> bfsQueue = Queue();
-    bfsQueue.add(_tree[nodeId]!);
+    if (checkNodeId(nodeId)) {
+      List<String> ancestors = [];
+      Queue<Node> bfsQueue = Queue();
+      bfsQueue.add(_tree[nodeId]!);
 
-    while (bfsQueue.isNotEmpty) {
-      Node currentNode = bfsQueue.removeFirst();
-      ancestors.add(currentNode.id);
-      currentNode.parent.forEach((nodeId) {
-        bfsQueue.add(_tree[nodeId]!);
-      });
+      while (bfsQueue.isNotEmpty) {
+        Node currentNode = bfsQueue.removeFirst();
+        ancestors.add(currentNode.id);
+        currentNode.parent.forEach((nodeId) {
+          bfsQueue.add(_tree[nodeId]!);
+        });
+      }
+      ancestors.remove(nodeId);
+      return ancestors;
     }
-    ancestors.remove(nodeId);
-    ancestors.sort();
-    return ancestors;
+
+    throw Exception('Enter valid node id');
   }
 
   //get descendants using breadth first search for the given node
   List<String> getDescendants(String nodeId) {
-    List<String> descendants = [];
-    Queue<Node> bfsQueue = Queue();
-    bfsQueue.add(_tree[nodeId]!);
+    if (checkNodeId(nodeId)) {
+      List<String> descendants = [];
+      Queue<Node> bfsQueue = Queue();
+      bfsQueue.add(_tree[nodeId]!);
 
-    while (bfsQueue.isNotEmpty) {
-      Node currentNode = bfsQueue.removeFirst();
-      descendants.add(currentNode.id);
-      currentNode.children.forEach((nodeId) {
-        bfsQueue.add(_tree[nodeId]!);
-      });
+      while (bfsQueue.isNotEmpty) {
+        Node currentNode = bfsQueue.removeFirst();
+        descendants.add(currentNode.id);
+        currentNode.children.forEach((nodeId) {
+          bfsQueue.add(_tree[nodeId]!);
+        });
+      }
+      descendants.remove(nodeId);
+      return descendants;
     }
-    descendants.remove(nodeId);
-    descendants.sort();
-    return descendants;
+
+    throw Exception('Enter valid node id');
   }
 
   //get if loop exists in the graph currently using breadth first search for the given node

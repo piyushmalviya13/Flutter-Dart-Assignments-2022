@@ -128,7 +128,11 @@ void main() {
       tree.addNode('3', 'test3');
       tree.addDependency('1', '2');
       tree.addDependency('2', '3');
-      expect(tree.getAncestors('3'), ['1', '2']);
+      expect(tree.getAncestors('3'), ['2', '1']);
+    });
+    test('get children ancestor works correctly for invalid input', () {
+      Tree tree = Tree();
+      expect(() => {tree.getAncestors('2')}, throwsException);
     });
   });
 
@@ -141,6 +145,10 @@ void main() {
       tree.addDependency('1', '2');
       tree.addDependency('2', '3');
       expect(tree.getDescendants('1'), ['2', '3']);
+    });
+    test('get descendants function works correctly for invalid input', () {
+      Tree tree = Tree();
+      expect(() => {tree.getDescendants('2')}, throwsException);
     });
   });
 }

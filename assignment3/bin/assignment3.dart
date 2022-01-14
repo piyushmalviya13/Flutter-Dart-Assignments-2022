@@ -22,6 +22,7 @@ void main() {
       choice = stdin.readLineSync()!;
       switch (choice) {
         case '1':
+          print('');
           tree.getNodeIds().forEach((id) {
             print(id);
           });
@@ -29,6 +30,7 @@ void main() {
         case '2':
           print('Enter node id: ');
           String input = stdin.readLineSync()!;
+          print('');
           tree.getParents(input).forEach((node) {
             print(node);
           });
@@ -36,6 +38,7 @@ void main() {
         case '3':
           print('Enter node id: ');
           String input = stdin.readLineSync()!;
+          print('');
           tree.getChildren(input).forEach((node) {
             print(node);
           });
@@ -43,6 +46,7 @@ void main() {
         case '4':
           print('Enter node id: ');
           String input = stdin.readLineSync()!;
+          print('');
           tree.getAncestors(input).forEach((node) {
             print(node);
           });
@@ -50,6 +54,7 @@ void main() {
         case '5':
           print('Enter node id: ');
           String input = stdin.readLineSync()!;
+          print('');
           tree.getDescendants(input).forEach((node) {
             print(node);
           });
@@ -57,29 +62,33 @@ void main() {
         case '6':
           print('Enter node id in format `<Parent id> <Child id>` :');
           String input = stdin.readLineSync()!;
+          print('');
           print(
               tree.removeDependency(input.split(' ')[0], input.split(' ')[1]));
           break;
         case '7':
           print('Enter node id: ');
           String input = stdin.readLineSync()!;
+          print('');
           print(tree.removeNode(input));
           break;
         case '8':
           print('Enter node id in format `<Parent id> <Child id>` :');
           String input = stdin.readLineSync()!;
+          print('');
           print(tree.addDependency(input.split(' ')[0], input.split(' ')[1]));
           break;
         case '9':
           print('Enter new node in format `<id> <name>` :');
           String input = stdin.readLineSync()!;
+          print('');
           print(tree.addNode(input.split(' ')[0], input.split(' ')[1]));
           break;
         case '10':
-          print('Exiting');
+          print('Exiting\n');
           break;
         default:
-          print('Enter valid choice');
+          print('Enter valid choice!!\n');
           break;
       }
     } catch (e) {
