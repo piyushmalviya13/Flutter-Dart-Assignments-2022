@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class ContactListViewModel extends ChangeNotifier {
   List<Contact> _contacts = [];
+  List<Contact>? _filteredContacts;
 
   PermissionStatus? _contactPermission;
   int _identifier = 1;
@@ -23,7 +24,7 @@ class ContactListViewModel extends ChangeNotifier {
   PermissionStatus? get getPermissionStatus => _contactPermission;
 
   UnmodifiableListView<Contact> get getContacts =>
-      UnmodifiableListView(_contacts);
+      UnmodifiableListView(_filteredContacts ?? _contacts);
 
   void _getContactsFromHiveStorage() async {
     _contactPermission = await Permission.contacts.request();
@@ -86,6 +87,20 @@ class ContactListViewModel extends ChangeNotifier {
     addContact(updatedContact);
     ContactBox.instance.saveToHiveStorage(_contacts);
     _sortContactList();
+    notifyListeners();
+  }
+
+  filterContacts(String query) {
+    List<Contact> filtered = _contacts
+        .where((contact) =>
+            contact.displayName!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    if(_filteredContacts == null) {
+      _filteredContacts = filtered;
+    }else {
+      _filteredContacts!.clear();
+      _filteredContacts!.addAll(filtered);
+    }
     notifyListeners();
   }
 }

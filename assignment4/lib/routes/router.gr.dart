@@ -26,12 +26,15 @@ class AppRouter extends _i3.RootStackRouter {
           routeData: routeData, child: const _i1.ContactListScreen());
     },
     AddEditContactRoute.name: (routeData) {
-      final args = routeData.argsAs<AddEditContactRouteArgs>(
-          orElse: () => const AddEditContactRouteArgs());
+      final args = routeData.argsAs<AddEditContactRouteArgs>();
       return _i3.MaterialPageX<dynamic>(
           routeData: routeData,
-          child:
-              _i2.AddEditContactScreen(key: args.key, contact: args.contact));
+          child: _i2.AddEditContactScreen(
+              key: args.key,
+              contact: args.contact,
+              addContact: args.addContact,
+              updateContact: args.updateContact,
+              generateIdentifierForContact: args.generateIdentifierForContact));
     }
   };
 
@@ -52,18 +55,39 @@ class ContactListRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for [_i2.AddEditContactScreen]
 class AddEditContactRoute extends _i3.PageRouteInfo<AddEditContactRouteArgs> {
-  AddEditContactRoute({_i4.Key? key, _i5.Contact? contact})
+  AddEditContactRoute(
+      {_i4.Key? key,
+      _i5.Contact? contact,
+      required dynamic addContact,
+      required dynamic updateContact,
+      dynamic generateIdentifierForContact})
       : super(name,
             path: '/add-edit-contact-screen',
-            args: AddEditContactRouteArgs(key: key, contact: contact));
+            args: AddEditContactRouteArgs(
+                key: key,
+                contact: contact,
+                addContact: addContact,
+                updateContact: updateContact,
+                generateIdentifierForContact: generateIdentifierForContact));
 
   static const String name = 'AddEditContactRoute';
 }
 
 class AddEditContactRouteArgs {
-  const AddEditContactRouteArgs({this.key, this.contact});
+  const AddEditContactRouteArgs(
+      {this.key,
+      this.contact,
+      required this.addContact,
+      required this.updateContact,
+      this.generateIdentifierForContact});
 
   final _i4.Key? key;
 
   final _i5.Contact? contact;
+
+  final dynamic addContact;
+
+  final dynamic updateContact;
+
+  final dynamic generateIdentifierForContact;
 }

@@ -1,10 +1,9 @@
+import 'package:assignment4/screens/contact_list_screen/viewmodel/contact_list_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchWidget extends StatefulWidget {
-  final ValueChanged<String> onChanged;
-  final String query;
-
-  const SearchWidget({Key? key, required this.onChanged, required this.query})
+  const SearchWidget({Key? key})
       : super(key: key);
 
   @override
@@ -13,12 +12,12 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   final controller = TextEditingController();
-
+  final String query = '';
   @override
   Widget build(BuildContext context) {
     const styleActive = TextStyle(color: Colors.black);
     const styleHint = TextStyle(color: Colors.black54);
-    final style = widget.query.isEmpty ? styleHint : styleActive;
+    final style = query.isEmpty ? styleHint : styleActive;
 
     return Container(
       height: 42,
@@ -32,21 +31,23 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          icon: Icon(Icons.search, color: style.color),
-          suffixIcon: GestureDetector(
-            child: Icon(Icons.close, color: style.color),
-            onTap: () {
-              controller.clear();
-              widget.onChanged('');
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
+          icon: controller.text.isEmpty ? Icon(Icons.search, color: style.color) : GestureDetector(
+            child: Icon(Icons.close, color: style.color), onTap: () {
+            controller.clear();
+            Provider.of<ContactListViewModel>(context,
+                listen: false).filterContacts('');
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
           ),
           hintText: "Enter Contact Name...",
           hintStyle: style,
           border: InputBorder.none,
         ),
         style: style,
-        onChanged: widget.onChanged,
+        onChanged: (_) {
+          Provider.of<ContactListViewModel>(context,
+              listen: false).filterContacts(controller.text);
+        },
       ),
     );
   }
