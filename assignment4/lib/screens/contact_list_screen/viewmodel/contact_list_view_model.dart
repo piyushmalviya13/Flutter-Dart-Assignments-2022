@@ -73,12 +73,14 @@ class ContactListViewModel extends ChangeNotifier {
     _incrementIdentifier();
     ContactBox.instance.saveToHiveStorage(_contacts);
     _sortContactList();
+    filterContacts('');
     notifyListeners();
   }
 
   void removeContact(String identifier) {
     _contacts.removeWhere((contact) => contact.identifier == identifier);
     ContactBox.instance.saveToHiveStorage(_contacts);
+    filterContacts('');
     notifyListeners();
   }
 
@@ -87,17 +89,18 @@ class ContactListViewModel extends ChangeNotifier {
     addContact(updatedContact);
     ContactBox.instance.saveToHiveStorage(_contacts);
     _sortContactList();
+    filterContacts('');
     notifyListeners();
   }
 
-  filterContacts(String query) {
+  void filterContacts(String query) {
     List<Contact> filtered = _contacts
         .where((contact) =>
             contact.displayName!.toLowerCase().contains(query.toLowerCase()))
         .toList();
-    if(_filteredContacts == null) {
+    if (_filteredContacts == null) {
       _filteredContacts = filtered;
-    }else {
+    } else {
       _filteredContacts!.clear();
       _filteredContacts!.addAll(filtered);
     }

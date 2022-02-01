@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key? key})
-      : super(key: key);
+  const SearchWidget({Key? key}) : super(key: key);
 
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -13,6 +12,7 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   final controller = TextEditingController();
   final String query = '';
+
   @override
   Widget build(BuildContext context) {
     const styleActive = TextStyle(color: Colors.black);
@@ -31,22 +31,26 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          icon: controller.text.isEmpty ? Icon(Icons.search, color: style.color) : GestureDetector(
-            child: Icon(Icons.close, color: style.color), onTap: () {
-            controller.clear();
-            Provider.of<ContactListViewModel>(context,
-                listen: false).filterContacts('');
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          ),
+          icon: controller.text.isEmpty
+              ? Icon(Icons.search, color: style.color)
+              : GestureDetector(
+                  child: Icon(Icons.close, color: style.color),
+                  onTap: () {
+                    controller.clear();
+                    Provider.of<ContactListViewModel>(context, listen: false)
+                        .filterContacts('');
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                ),
           hintText: "Enter Contact Name...",
           hintStyle: style,
           border: InputBorder.none,
         ),
         style: style,
         onChanged: (_) {
-          Provider.of<ContactListViewModel>(context,
-              listen: false).filterContacts(controller.text);
+          setState(() {});
+          Provider.of<ContactListViewModel>(context, listen: false)
+              .filterContacts(controller.text);
         },
       ),
     );

@@ -28,11 +28,15 @@ class ContactListScreen extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).scaffoldBackgroundColor),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
+                          MaterialStateProperty.all<Color>(Colors.blue),
                       padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
                           const EdgeInsets.all(20))),
                   onPressed: () => {
-                    AutoRouter.of(context).push(AddEditContactRoute(addContact: model.addContact, updateContact: model.updateContact, generateIdentifierForContact: model.generateIdentifierForContact))
+                    AutoRouter.of(context).push(AddEditContactRoute(
+                        addContact: model.addContact,
+                        updateContact: model.updateContact,
+                        generateIdentifierForContact:
+                            model.generateIdentifierForContact))
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -44,8 +48,9 @@ class ContactListScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: ContactList(
-                    contactList: model.getContacts, addContact: model.addContact, updateContact: model.updateContact
-                  ),
+                      contactList: model.getContacts,
+                      addContact: model.addContact,
+                      updateContact: model.updateContact),
                 ),
               ],
             ),

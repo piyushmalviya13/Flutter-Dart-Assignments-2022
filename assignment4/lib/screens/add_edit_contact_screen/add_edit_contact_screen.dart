@@ -13,7 +13,14 @@ class AddEditContactScreen extends StatefulWidget {
   final addContact;
   final updateContact;
   final generateIdentifierForContact;
-  const AddEditContactScreen({Key? key, this.contact,required this.addContact,required this.updateContact, this.generateIdentifierForContact}) : super(key: key);
+
+  const AddEditContactScreen(
+      {Key? key,
+      this.contact,
+      required this.addContact,
+      required this.updateContact,
+      this.generateIdentifierForContact})
+      : super(key: key);
 
   @override
   State<AddEditContactScreen> createState() => _AddEditContactScreenState();
@@ -92,15 +99,12 @@ class _AddEditContactScreenState extends State<AddEditContactScreen> {
           TextButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  widget.contact == null
-                      ? _addContact()
-                      : _updateContact();
+                  widget.contact == null ? _addContact() : _updateContact();
                 }
               },
               child: const Text("Save"),
               style: ButtonStyle(
-                foregroundColor:
-                MaterialStateProperty.all<Color>(Colors.white),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ))
         ],
       ),
@@ -149,8 +153,8 @@ class _AddEditContactScreenState extends State<AddEditContactScreen> {
                       child: Column(
                         children: [
                           TextFormField(
-                            decoration: const InputDecoration(
-                                labelText: "First Name"),
+                            decoration:
+                                const InputDecoration(labelText: "First Name"),
                             onChanged: (value) {
                               setState(() {
                                 _contact.givenName = value;
@@ -174,8 +178,8 @@ class _AddEditContactScreenState extends State<AddEditContactScreen> {
                               },
                               initialValue: _contact.middleName),
                           TextFormField(
-                              decoration: const InputDecoration(
-                                  labelText: "Last Name"),
+                              decoration:
+                                  const InputDecoration(labelText: "Last Name"),
                               onChanged: (value) {
                                 setState(() {
                                   _contact.familyName = value;
@@ -207,13 +211,12 @@ class _AddEditContactScreenState extends State<AddEditContactScreen> {
                             decoration: const InputDecoration(
                                 labelText: "Phone Number"),
                             initialValue: (_contact.phones == null ||
-                                _contact.phones!.isEmpty)
+                                    _contact.phones!.isEmpty)
                                 ? ""
                                 : _contact.phones?[0].value,
                             onChanged: (value) {
                               List<Item> phones = [];
-                              phones
-                                  .add(Item(label: "phone", value: value));
+                              phones.add(Item(label: "phone", value: value));
                               setState(() {
                                 _contact.phones = phones;
                               });
@@ -252,17 +255,16 @@ class _AddEditContactScreenState extends State<AddEditContactScreen> {
                         children: [
                           TextFormField(
                               decoration:
-                              const InputDecoration(labelText: "Email"),
+                                  const InputDecoration(labelText: "Email"),
                               onChanged: (value) {
                                 List<Item> emails = [];
-                                emails.add(
-                                    Item(label: "email", value: value));
+                                emails.add(Item(label: "email", value: value));
                                 setState(() {
                                   _contact.emails = emails;
                                 });
                               },
                               initialValue: (_contact.emails == null ||
-                                  _contact.emails!.isEmpty)
+                                      _contact.emails!.isEmpty)
                                   ? ""
                                   : _contact.emails?[0].value),
                         ],

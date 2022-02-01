@@ -11,7 +11,13 @@ class ContactList extends StatelessWidget {
   final List<Contact> contactList;
   final addContact;
   final updateContact;
-  const ContactList({Key? key, required this.contactList, required this.addContact,required this.updateContact}) : super(key: key);
+
+  const ContactList(
+      {Key? key,
+      required this.contactList,
+      required this.addContact,
+      required this.updateContact})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +32,10 @@ class ContactList extends StatelessWidget {
               return ListTile(
                 key: UniqueKey(),
                 onTap: () {
-                  AutoRouter.of(context)
-                      .push(AddEditContactRoute(contact: contactList[index], addContact: addContact, updateContact: updateContact));
+                  AutoRouter.of(context).push(AddEditContactRoute(
+                      contact: contactList[index],
+                      addContact: addContact,
+                      updateContact: updateContact));
                 },
                 leading: CircleAvatar(
                   backgroundColor: Colors
